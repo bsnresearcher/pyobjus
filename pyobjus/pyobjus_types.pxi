@@ -1,9 +1,11 @@
-if PLATFORM == b'darwin':
+if PLATFORM in ('darwin',b'darwin'):
     ulng = ctypes.c_ulonglong
 
-elif PLATFORM == b'ios':
+elif PLATFORM in ('ios',b'ios'):
     # for some reason ctypes doesn't work ok with c_ulonglong on ARM
     ulng = ctypes.c_ulong
+else:
+    raise ValueError("PLATFORM was dopped out of range: %s" % PLATFORM)
 
 
 class NSRange(ctypes.Structure):
